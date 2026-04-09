@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciativa · Consultores y Asesores de Empresa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --navy-mid: #162032;
+      --gold: #b8933f;
+      --gold-light: #d4ad63;
+      --gold-pale: #f5ede0;
+      --cream: #faf8f4;
+      --text: #1a1a1a;
+      --text-mid: #4a4a4a;
+      --text-light: #7a7a7a;
+      --border: rgba(184,147,63,0.25);
+      --border-dark: rgba(255,255,255,0.12);
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 5vw;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(13, 27, 42, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dark);
+      transition: all var(--transition);
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .nav-logo .wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-logo .tagline {
+      font-size: 9px;
+      font-weight: 300;
+      color: var(--gold-light);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(184,147,63,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,147,63,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-left {
+      padding: 160px 6vw 80px 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 5.5vw, 72px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.4s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      max-width: 480px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.6s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.8s forwards;
+    }
+
+    .btn-primary {
+      padding: 16px 36px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      padding: 16px 36px;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.75);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 1.2s 0.5s forwards;
+    }
+
+    .hero-right-inner {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #162032 0%, #0d1b2a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem;
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      z-index: 3;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      width: 100%;
+    }
+
+    .hero-stat {
+      padding: 40px 32px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(184,147,63,0.12);
+      transition: all var(--transition);
+      opacity: 0;
+      animation: fadeUp 0.8s forwards;
+    }
+
+    .hero-stat:nth-child(1) { animation-delay: 0.7s; }
+    .hero-stat:nth-child(2) { animation-delay: 0.85s; }
+    .hero-stat:nth-child(3) { animation-delay: 1.0s; }
+    .hero-stat:nth-child(4) { animation-delay: 1.15s; }
+
+    .hero-stat:hover {
+      background: rgba(184,147,63,0.08);
+      border-color: rgba(184,147,63,0.35);
+      transform: translateY(-2px);
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 400;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.4;
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-line {
+      position: absolute;
+      bottom: 40px;
+      left: 5vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 3;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s forwards;
+    }
+
+    .scroll-line span {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      writing-mode: vertical-lr;
+    }
+
+    .scroll-line::after {
+      content: '';
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* ── SERVICIOS ── */
+    .section-services {
+      background: var(--cream);
+      padding: 120px 5vw;
+    }
+
+    .section-header {
+      max-width: 700px;
+      margin-bottom: 80px;
+    }
+
+    .section-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--gold);
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 4vw, 56px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--navy);
+    }
+
+    .section-header h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .service-card {
+      background: var(--cream);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition);
+      cursor: default;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+
+    .service-card:hover { background: #fff; }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 28px;
+      color: var(--gold);
+    }
+
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .service-card p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      transition: gap var(--transition);
+    }
+
+    .service-link:hover { gap: 14px; }
+
+    /* ── PAE BANNER ── */
+    .pae-section {
+      background: var(--navy);
+      padding: 100px 5vw;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pae-section::before {
+      content: 'PAE';
+      position: absolute;
+      right: 4vw;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(120px, 18vw, 220px);
+      font-weight: 600;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .pae-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pae-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 3.5vw, 48px);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .pae-left h2 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .pae-left p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 19px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+    }
+
+    .pae-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .pae-item {
+      padding: 24px 28px;
+      background: rgba(255,255,255,0.04);
+      border-left: 2px solid transparent;
+      transition: all var(--transition);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .pae-item:hover {
+      background: rgba(184,147,63,0.08);
+      border-left-color: var(--gold);
+    }
+
+    .pae-item-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    .pae-item p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+
+    /* ── NOSOTROS ── */
+    .about-section {
+      padding: 120px 5vw;
+      background: #fff;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .about-left .section-tag { margin-bottom: 24px; }
+
+    .about-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 32px;
+    }
+
+    .about-left h2 em { font-style: italic; color: var(--gold); }
+
+    .about-left p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 19px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .value-item {
+      display: flex;
+      gap: 24px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+
+    .value-item:hover {
+      border-color: var(--gold);
+      background: var(--gold-pale);
+    }
+
+    .value-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--gold);
+      opacity: 0.4;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 56px;
+    }
+
+    .value-item h4 {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .value-item p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    /* ── CONTACTO ── */
+    .contact-section {
+      background: var(--navy);
+      padding: 100px 5vw;
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1200px;
+    }
+
+    .contact-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 28px;
+    }
+
+    .contact-left h2 em { font-style: italic; color: var(--gold-light); }
+
+    .contact-left p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 19px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .contact-row-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .contact-row-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    .contact-row-text strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 4px;
+    }
+
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 14px 18px;
+      font-family: 'Crimson Pro', serif;
+      font-size: 17px;
+      font-weight: 300;
+      outline: none;
+      transition: border-color var(--transition);
+      appearance: none;
+    }
+
+    .form-group select option { background: var(--navy); color: #fff; }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+    .form-group textarea { min-height: 120px; resize: vertical; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn-submit {
+      padding: 18px 40px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      align-self: flex-start;
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #070f18;
+      padding: 48px 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-logo .wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-logo .tagline {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-top: 4px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--gold-light); }
+
+    /* ── ANIMACIONES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      nav { padding: 0 6vw; }
+      .nav-links { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .pae-inner,
+      .about-section,
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 24px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    }
+
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: rgba(255,255,255,0.7);
+      transition: all var(--transition);
+    }
+
+    @media (max-width: 900px) {
+      .nav-hamburger { display: flex; }
+      .nav-cta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="wordmark">Iniciativa</span>
+    <span class="tagline">Consultores &amp; Asesores de Empresa</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#pae">Punto PAE</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Solicitar consulta</a>
+  <div class="nav-hamburger" onclick="toggleMenu(this)">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+
+  <div class="hero-left">
+    <p class="hero-label">Ceuta · Desde 2013</p>
+    <h1>Tu empresa,<br/><em>nuestro compromiso</em></h1>
+    <p class="hero-desc">
+      Asesoramiento integral para emprendedores y empresas. Desde la creación hasta la consolidación de tu negocio, estamos contigo en cada paso.
+    </p>
+    <div class="hero-actions">
+      <a href="#servicios" class="btn-primary">Conoce nuestros servicios</a>
+      <a href="#contacto" class="btn-outline">Hablar con un asesor</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-inner">
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-number">+10</div>
+          <div class="stat-label">Años de<br/>experiencia</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">1º</div>
+          <div class="stat-label">Punto PAE<br/>en Ceuta</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">360°</div>
+          <div class="stat-label">Asesoramiento<br/>integral</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Compromiso<br/>con el cliente</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-line">
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="section-services" id="servicios">
+  <div class="section-header reveal">
+    <p class="section-tag">Áreas de práctica</p>
+    <h2>Un catálogo completo<br/>de <em>servicios profesionales</em></h2>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="8" width="36" height="32" rx="2"/>
+        <line x1="14" y1="20" x2="34" y2="20"/>
+        <line x1="14" y1="27" x2="34" y2="27"/>
+        <line x1="14" y1="34" x2="24" y2="34"/>
+      </svg>
+      <h3>Gestión Contable</h3>
+      <p>Llevanza completa de la contabilidad de tu empresa. Registros, libros oficiales y estados financieros con total precisión y puntualidad.</p>
+      <a href="#contacto" class="service-link">Saber más →</a>
+    </div>
+
+    <div class="service-card reveal" style="transition-delay: 0.1s">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M24 6 L38 14 V30 L24 42 L10 30 V14 Z"/>
+        <line x1="24" y1="16" x2="24" y2="28"/>
+        <line x1="18" y1="22" x2="30" y2="22"/>
+      </svg>
+      <h3>Declaraciones Tributarias</h3>
+      <p>Gestión de IVA, IRPF, Impuesto de Sociedades y todas las obligaciones fiscales. Optimización legal de la carga tributaria de tu negocio.</p>
+      <a href="#contacto" class="service-link">Saber más →</a>
+    </div>
+
+    <div class="service-card reveal" style="transition-delay: 0.2s">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="24" cy="20" r="10"/>
+        <path d="M10 40c0-7.7 6.3-14 14-14s14 6.3 14 14"/>
+      </svg>
+      <h3>Asesoría Laboral</h3>
+      <p>Altas, bajas y modificaciones en la Seguridad Social. Elaboración de nóminas, contratos de trabajo y gestión de ERTEs y expedientes.</p>
+      <a href="#contacto" class="service-link">Saber más →</a>
+    </div>
+
+    <div class="service-card reveal" style="transition-delay: 0.0s">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 12 h32 v24 h-32 Z"/>
+        <path d="M16 12 V8 M32 12 V8"/>
+        <line x1="8" y1="20" x2="40" y2="20"/>
+      </svg>
+      <h3>Obligaciones Mercantiles</h3>
+      <p>Constitución de sociedades, modificación de estatutos, depósito de cuentas en el Registro Mercantil y demás trámites corporativos.</p>
+      <a href="#contacto" class="service-link">Saber más →</a>
+    </div>
+
+    <div class="service-card reveal" style="transition-delay: 0.1s">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M24 6 C14 6 8 14 8 24 C8 34 14 42 24 42"/>
+        <path d="M24 6 C34 6 40 14 40 24 C40 34 34 42 24 42"/>
+        <line x1="8" y1="24" x2="40" y2="24"/>
+        <line x1="24" y1="6" x2="24" y2="42"/>
+      </svg>
+      <h3>Búsqueda de Subvenciones</h3>
+      <p>Identificación y gestión de ayudas públicas, subvenciones y programas de financiación autonómicos, estatales y europeos para tu empresa.</p>
+      <a href="#contacto" class="service-link">Saber más →</a>
+    </div>
+
+    <div class="service-card reveal" style="transition-delay: 0.2s">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="30" width="36" height="12" rx="1"/>
+        <rect x="10" y="20" width="10" height="10"/>
+        <rect x="22" y="14" width="10" height="16"/>
+        <rect x="34" y="8" width="10" height="22" x="34" y="8"/>
+        <path d="M10 25 L22 19 L34 13"/>
+      </svg>
+      <h3>Negociación Bancaria</h3>
+      <p>Apoyo en la financiación empresarial. Negociación con entidades bancarias, estudio de viabilidad financiera y reestructuración de deuda.</p>
+      <a href="#contacto" class="service-link">Saber más →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAE -->
+<section class="pae-section" id="pae">
+  <div class="pae-inner">
+    <div class="pae-left reveal">
+      <p class="section-tag" style="color: var(--gold);">
+        <span style="width:32px;height:1px;background:var(--gold);display:inline-block;vertical-align:middle;margin-right:12px;"></span>
+        Punto de Atención al Emprendedor
+      </p>
+      <h2>El <em>primer PAE</em> de Ceuta, a tu servicio</h2>
+      <p>
+        Constituidos al amparo de la Ley 14/2013 de apoyo a los emprendedores, somos el primer Punto de Atención al Emprendedor (PAE) de la ciudad de Ceuta. Te acompañamos desde la idea hasta la puesta en marcha de tu negocio.
+      </p>
+    </div>
+
+    <div class="pae-right reveal">
+      <div class="pae-item">
+        <div class="pae-item-dot"></div>
+        <p>Tramitación telemática a través de la red CIRCE del Ministerio de Industria, Energía y Turismo.</p>
+      </div>
+      <div class="pae-item">
+        <div class="pae-item-dot"></div>
+        <p>Asesoramiento sobre la figura del emprendedor de responsabilidad limitada, con protección de la vivienda habitual hasta 300.000 €.</p>
+      </div>
+      <div class="pae-item">
+        <div class="pae-item-dot"></div>
+        <p>Capitalización de la prestación por desempleo y autoempleo: te asesoramos en cada paso del proceso.</p>
+      </div>
+      <div class="pae-item">
+        <div class="pae-item-dot"></div>
+        <p>Formación específica para emprendedores: desde el plan de negocio hasta la apertura del establecimiento.</p>
+      </div>
+      <div class="pae-item">
+        <div class="pae-item-dot"></div>
+        <p>Apoyo integral a la financiación: búsqueda de inversores, ayudas públicas y líneas de crédito favorables.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section class="about-section" id="nosotros">
+  <div class="about-left reveal">
+    <p class="section-tag">Quiénes somos</p>
+    <h2>Profesionales con<br/><em>experiencia real</em></h2>
+    <p>
+      Somos economistas y asesores fiscales con amplia trayectoria en el acompañamiento de empresas y emprendedores. Entendemos que la crisis puede ser una oportunidad: la necesidad agudiza el ingenio.
+    </p>
+    <p>
+      Nuestras oficinas están ubicadas en el Paseo del Revellín, 22, 1º, Oficina A — en el corazón de Ceuta. Desde allí, atendemos a empresas de todos los tamaños con el mismo nivel de exigencia y dedicación.
+    </p>
+    <a href="#contacto" class="btn-primary" style="margin-top: 16px; display: inline-block;">Concertar una cita</a>
+  </div>
+
+  <div class="about-right reveal">
+    <div class="value-item">
+      <div class="value-number">01</div>
+      <div>
+        <h4>Proximidad</h4>
+        <p>Te conocemos por tu nombre, no por tu número de expediente. Atención personalizada y directa con el asesor responsable de tu cuenta.</p>
+      </div>
+    </div>
+    <div class="value-item">
+      <div class="value-number">02</div>
+      <div>
+        <h4>Experiencia</h4>
+        <p>Más de una década asesorando a emprendedores y pymes en Ceuta. Conocemos la realidad local y la normativa que afecta a tu negocio.</p>
+      </div>
+    </div>
+    <div class="value-item">
+      <div class="value-number">03</div>
+      <div>
+        <h4>Integridad</h4>
+        <p>Actuamos siempre con transparencia y dentro de la legalidad vigente. Te informamos de todas las opciones disponibles, sin letra pequeña.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact-section" id="contacto">
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <p class="section-tag" style="color:var(--gold); margin-bottom:24px;">
+        <span style="width:32px;height:1px;background:var(--gold);display:inline-block;vertical-align:middle;margin-right:12px;"></span>
+        Contacto
+      </p>
+      <h2>Hablemos de<br/><em>tu proyecto</em></h2>
+      <p>
+        La primera consulta es siempre gratuita. Cuéntanos tu situación y te damos una respuesta honesta y sin compromiso.
+      </p>
+
+      <div class="contact-details">
+        <div class="contact-row">
+          <svg class="contact-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <div class="contact-row-text">
+            <strong>Dirección</strong>
+            Paseo del Revellín, 22, 1º, Oficina A<br/>51001 Ceuta, España
+          </div>
+        </div>
+        <div class="contact-row">
+          <svg class="contact-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 8l10 6 10-6"/>
+          </svg>
+          <div class="contact-row-text">
+            <strong>Email</strong>
+            info@iniciativaceuta.es
+          </div>
+        </div>
+        <div class="contact-row">
+          <svg class="contact-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.22 2 2 0 012 .04h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          <div class="contact-row-text">
+            <strong>Teléfono</strong>
+            Disponible en la oficina
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre completo" />
+        </div>
+        <div class="form-group">
+          <label>Empresa</label>
+          <input type="text" placeholder="Nombre de la empresa" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="tu@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Área de consulta</label>
+        <select>
+          <option value="">Selecciona un servicio…</option>
+          <option>Creación de empresa (PAE)</option>
+          <option>Gestión contable</option>
+          <option>Declaraciones tributarias</option>
+          <option>Asesoría laboral</option>
+          <option>Subvenciones y ayudas</option>
+          <option>Negociación bancaria</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensaje</label>
+        <textarea placeholder="Cuéntanos brevemente tu situación o consulta…"></textarea>
+      </div>
+      <button class="btn-submit" onclick="handleSubmit(event)">Enviar consulta</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="wordmark">Iniciativa</div>
+    <div class="tagline">Consultores &amp; Asesores de Empresa</div>
+  </div>
+  <p class="footer-copy">© 2025 Iniciativa. Todos los derechos reservados.</p>
+  <ul class="footer-links">
+    <li><a href="#">Aviso legal</a></li>
+    <li><a href="#">Privacidad</a></li>
+    <li><a href="#">Cookies</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.height = window.scrollY > 80 ? '60px' : '72px';
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Mobile menu (placeholder)
+  function toggleMenu(el) {
+    el.classList.toggle('open');
+  }
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = 'Mensaje enviado ✓';
+    btn.style.background = '#2a5c3f';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Enviar consulta';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 3000);
+  }
+</script>
+</body>
+</html>
